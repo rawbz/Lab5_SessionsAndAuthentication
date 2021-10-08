@@ -15,7 +15,7 @@
         <h1>Login</h1>
         <form action="login" method="POST">
             <div>
-                <label>Username: </label>
+                <label>Username: ${username}</label>
                 <input type="text" name="username" value="">
             </div>
             <div>

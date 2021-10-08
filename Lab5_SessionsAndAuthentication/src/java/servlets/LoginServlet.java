@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         
-        
+
        if(username == null || username.equals("") || password == null || password.equals("")){
         
             String errorMessage = "Invalid login";
@@ -53,17 +53,22 @@ public class LoginServlet extends HttpServlet {
         //creat a new service object to call login method
         AccountService service = new AccountService();
 
-        user = service.login(username, password);
-        
-        if(user == null){
+        if(service.login(username, password) == null){
+            
+            System.out.println("We are in the if statement");
+            System.out.println(username);
+            
             String errorMessage = "Invalid login";
             request.setAttribute("message", errorMessage);
+            
+            session.setAttribute("username", username);
             
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
             return;
         }
         
-        
+        System.out.print("we went right through");
+        response.sendRedirect("home");
     
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
 
