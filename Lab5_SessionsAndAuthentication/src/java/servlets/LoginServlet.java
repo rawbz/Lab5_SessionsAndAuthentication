@@ -19,25 +19,26 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+   
         
-        HttpSession session = request.getSession();
-        
-        if(request.getParameter("logout") == null ){
-        
-        System.out.print("we have in the not null line");
-        getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
-        
-        String loggedOut = "You have successfully logged out";
-        request.setAttribute("message", loggedOut);
-        
-        session.invalidate();
-        session = request.getSession();
-        return;
-        
+        if(request.getParameter("logout") != null){
+            
+            //if the logout param does exist, log out user and invalidate session
+            HttpSession session = request.getSession();
+
+            String loggedOut = "You have successfully logged out";
+            request.setAttribute("message", loggedOut);
+
+            session.invalidate();
+
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
+                   
+            
         } else{
             
-            System.out.println("we are in the else clause ");
+            //if the logout perameter doesnt exist, just show the login page 
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
+            return;
 
         }
   
@@ -49,9 +50,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        
-        System.out.println("This is a test.");
-        
+
         //capture user input 
         String username = request.getParameter("username");
         String password = request.getParameter("password");

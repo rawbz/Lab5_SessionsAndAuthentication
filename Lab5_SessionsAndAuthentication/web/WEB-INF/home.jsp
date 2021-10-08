@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Home Page</h1>
-        <p>Hello ${username}</p>
+        <h3>Hello ${username}!</h3>
         
         <a href="login?logout" name="operation" value="logout">Log out</a>
     </body>
