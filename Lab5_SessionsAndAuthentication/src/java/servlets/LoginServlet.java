@@ -19,12 +19,12 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-   
+        
+        HttpSession session = request.getSession();
         
         if(request.getParameter("logout") != null){
             
             //if the logout param does exist, log out user and invalidate session
-            HttpSession session = request.getSession();
 
             String loggedOut = "You have successfully logged out";
             request.setAttribute("message", loggedOut);
@@ -34,11 +34,16 @@ public class LoginServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
                    
             
-        } else{
+        }else{
+             
+            //check if username exists, if it does send to home page (this mean the user is already logged in)
+            if(session.getAttribute("username") != null){
+                response.sendRedirect("home");
+                return;
+            }
             
             //if the logout perameter doesnt exist, just show the login page 
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request,response);
-            return;
 
         }
   
