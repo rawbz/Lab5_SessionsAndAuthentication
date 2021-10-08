@@ -15,8 +15,8 @@
         <h1>Login</h1>
         <form action="login" method="POST">
             <div>
-                <label>Username: ${username}</label>
-                <input type="text" name="username" value="">
+                <label>Username: </label>
+                <input type="text" name="username" value="${username}">
             </div>
             <div>
                 <label>Password: </label>
